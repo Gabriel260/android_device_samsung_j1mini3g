@@ -1,4 +1,4 @@
-import /init.j3xnlte_base.rc
+import /init.j1mini3g_base.rc
 
 on boot
     export LD_SHIM_LIBS /system/bin/gpsd|libdmitry.so:/system/lib/libril.so|libril_shim.so

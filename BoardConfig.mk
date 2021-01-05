@@ -19,7 +19,7 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 WITH_SU := true
 
 # Remove "system.new.dat" format.System files are now in "system" folder of the ROM Package.(Easy for development purpose)
-BLOCK_BASED_OTA :=false
+BLOCK_BASED_OTA := false
 
 BOARD_NEEDS_MEMORYHEAPION_SPRD := true
 BOARD_USE_EMMC := true
@@ -59,6 +59,9 @@ BOARD_KERNEL_SEPARATED_DT := true
 
 TARGET_CUSTOM_DTBTOOL := dtbToolSprd
 
+# camera configs
+USE_CAMERA_STUB := true
+
 # fix this up by examining /proc/mtd on a running device
 BOARD_BOOTIMAGE_PARTITION_SIZE := 16777216
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 16777216
@@ -72,16 +75,9 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_SUPPRESS_SECURE_ERASE := true
 TARGET_USERIMAGES_USE_EXT4 := true
-TARGET_USERIMAGES_USE_F2FS := true
 
 # CMHW
 BOARD_HARDWARE_CLASS := hardware/samsung/cmhw/
-
-# Init
-TARGET_PROVIDES_INIT_RC := true
-TARGET_INIT_VENDOR_LIB := libinit_j1mini3g
-TARGET_RECOVERY_DEVICE_MODULES := libinit_j1mini3g
-TARGET_UNIFIED_DEVICE := true
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 800
@@ -119,6 +115,9 @@ TARGET_NO_SENSOR_PERMISSION_CHECK := true
 
 # WEBGL
 ENABLE_WEBGL := true
+
+#Init
+TARGET_PROVIDES_INIT_RC := true
 
 # Audio
 BOARD_USES_GENERIC_AUDIO := true
@@ -184,10 +183,6 @@ BOARD_SEPOLICY_DIRS += \
 
 # build.prop
 TARGET_SYSTEM_PROP := device/samsung/j1mini3g/system.prop
-
-#######################################################
-# TWRP
-RECOVERY_VARIANT := twrp
 
 # Display
 TW_THEME := portrait_hdpi

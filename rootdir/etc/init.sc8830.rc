@@ -17,6 +17,8 @@ on early-init
     pipe 666 /dev/rpipe/ril.vt.2
 
 on init
+stop ril-daemon
+
     # Support Preload install apks
     mkdir /preload 0771 system system
 
@@ -363,106 +365,30 @@ service phoneserver_lf /system/bin/phoneserver -m lf
     disabled
     oneshot
 
-##td rild service
-#service tril-daemon /system/bin/rild_sp -l /system/lib/libreference-ril_sp.so -m t -n 0
-#    class core
-#    socket trild stream 660 root radio
-#    socket trild-debug stream 660 radio system
-#    disabled
-#    user root
-#    group radio cache inet misc audio sdcard_rw log
-#
-#service tril-daemon1 /system/bin/rild_sp -l /system/lib/libreference-ril_sp.so -m t -n 1
-#    class core
-#    socket trild1 stream 660 root radio
-#    socket trild-debug1 stream 660 radio system
-#    disabled
-#    user root
-#    group radio cache inet misc audio sdcard_rw log
-#
-#service tril-daemon2 /system/bin/rild_sp -l /system/lib/libreference-ril_sp.so -m t -n 2
-#    class core
-#    socket trild2 stream 660 root radio
-#    socket trild-debug2 stream 660 radio system
-#    disabled
-#    user root
-#    group radio cache inet misc audio sdcard_rw log
-#
-##wcdma rild service
-#service wril-daemon /system/bin/rild_sp -l /system/lib/libreference-ril_sp.so -m w -n 0
-#    class core
-#    socket wrild stream 660 root radio
-#    socket wrild-debug stream 660 radio system
-#    disabled
-#    user root
-#    group radio cache inet misc audio sdcard_rw log shell
-#
-#service wril-daemon1 /system/bin/rild_sp -l /system/lib/libreference-ril_sp.so -m w -n 1
-#    class core
-#    socket wrild1 stream 660 root radio
-#    socket wrild-debug1 stream 660 radio system
-#    disabled
-#    user root
-#    group radio cache inet misc audio sdcard_rw log shell
-#
-#service wril-daemon2 /system/bin/rild_sp -l /system/lib/libreference-ril_sp.so -m w -n 2
-#    class core
-#    socket wrild2 stream 660 root radio
-#    socket wrild-debug2 stream 660 radio system
-#    disabled
-#    user root
-#    group radio cache inet misc audio sdcard_rw log shell
-#
-##lte rild service
-#service lril-daemon /system/bin/rild_sp -l /system/lib/libreference-ril_sp.so -m l -n 0
-#    class core
-#    socket rild stream 660 root radio
-#    socket rild-debug stream 660 radio system
-#    disabled
-#    user root
-#    group radio cache inet misc audio sdcard_rw log shell
-#
-#service lril-daemon1 /system/bin/rild_sp -l /system/lib/libreference-ril_sp.so -m l -n 1
-#    class core
-#    socket rild2 stream 660 root radio
-#    socket rild-debug2 stream 660 radio system
-#    disabled
-#    user root
-#    group radio cache inet misc audio sdcard_rw log shell
-#
-##tl rild service
-#service tlril-daemon /system/bin/rild_sp -l /system/lib/libreference-ril_sp.so -m tl -n 0
-#    class core
-#    socket rild stream 660 root radio
-#    socket rild-debug stream 660 radio system
-#    disabled
-#    user root
-#    group radio cache inet misc audio sdcard_rw log shell
-#
-#service tlril-daemon1 /system/bin/rild_sp -l /system/lib/libreference-ril_sp.so -m tl -n 1
-#    class core
-#    socket rild2 stream 660 root radio
-#    socket rild-debug2 stream 660 radio system
-#    disabled
-#    user root
-#    group radio cache inet misc audio sdcard_rw log shell
-#
-##lf rild service
-#service lfril-daemon /system/bin/rild_sp -l /system/lib/libreference-ril_sp.so -m lf -n 0
-#    class core
-#    socket rild stream 660 root radio
-#    socket rild-debug stream 660 radio system
-#    disabled
-#    user root
-#    group radio cache inet misc audio sdcard_rw log shell
-#
-#service lfril-daemon1 /system/bin/rild_sp -l /system/lib/libreference-ril_sp.so -m lf -n 1
-#    class core
-#    socket rild2 stream 660 root radio
-#    socket rild-debug2 stream 660 radio system
-#    disabled
-#    user root
-#    group radio cache inet misc audio sdcard_rw log shell
+#wcdma rild service
+service sprd-ril-daemon /system/bin/rild_sprd -l /system/lib/libreference-ril_sp.so -m w -n 0
+    class core
+    socket rild stream 660 root radio
+    socket rild-debug stream 660 radio system
+    user root
+    group radio cache inet misc audio sdcard_rw log shell
+    setenv LD_SHIM_LIBS /system/lib/libril.so|libril_shim.so
+
+service sprd-ril-daemon2 /system/bin/rild_sprd -l /system/lib/libreference-ril_sp.so -m w -n 1
+    class core
+    socket rild2 stream 660 root radio
+    socket rild-debug2 stream 660 radio system
+    user root
+    group radio cache inet misc audio sdcard_rw log shell
+    setenv LD_SHIM_LIBS /system/lib/libril.so|libril_shim.so
+
+service sprd-ril-daemon3 /system/bin/rild_sprd -l /system/lib/libreference-ril_sp.so -m w -n 2
+    class core
+    socket rild3 stream 660 root radio
+    socket rild-debug3 stream 660 radio system
+    user root
+    group radio cache inet misc audio sdcard_rw log shell
+    setenv LD_SHIM_LIBS /system/lib/libril.so|libril_shim.so
 
 #cp_diskserver
 service cp_diskserver_td /system/bin/cp_diskserver t 0
